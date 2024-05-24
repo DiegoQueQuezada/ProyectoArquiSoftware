@@ -1,0 +1,142 @@
+<app-menu></app-menu>
+
+<body>
+    <form (ngSubmit)="enviarFicha()" #formulario="ngForm">
+        <div class="datos">
+            <h1>Nueva ficha sanitaria</h1>
+            <div><b>Nombre:</b> {{ p.nombre }}</div>
+            <div><b>DNI:</b> {{ p.dni }}</div>
+        </div>
+
+        <div class="filas">
+            <label for="">Numero de ficha:</label>
+            <input #numeroF="ngModel" [(ngModel)]="f.nroFicha" name="nroFicha" type="number" max="99999" required
+                (input)="verificarNroFicha(f.nroFicha)" />
+        </div>
+        <div class="espacioAuxiliar">
+            <div *ngIf="numeroF.invalid && (numeroF.touched || numeroF.dirty)" class="alerta">
+                <div *ngIf="numeroF.errors!['max']">Maximo 5 digitos</div>
+                <div *ngIf="numeroF.errors!['required']">Campo obligatorio</div>
+            </div>
+            <div class="alerta" *ngIf="nroFichaRepetido">
+                Este numero ya ha sido registrado ingrese otro.
+            </div>
+        </div>
+        <div class="filas">
+            <label for="">Fecha de inscripcion:</label>
+            <input #fecha="ngModel" [(ngModel)]="f.fechaInscripcion" name="nroInscripcion" type="datetime-local"
+                (input)="validarFecha()" required />
+        </div>
+
+        <div class="espacioAuxiliar">
+            <div *ngIf="fecha.touched || fecha.dirty" class="alerta">
+                <div *ngIf="fechaEsAnterior">
+                    La fecha no puede ser anterior a la actual
+                </div>
+            </div>
+        </div>
+        <div class="filas">
+            <label for="grupo_sanguineo">Grupo Sanguíneo:</label>
+            <select [(ngModel)]="f.grupoSanguineo" name="grupoSanguineo" id="grupo_sanguineo">
+                <option value="" disabled selected hidden>
+                    Selecciona un grupo sanguíneo
+                </option>
+                <option value="A+">(A+)</option>
+                <option value="A-">(A-)</option>
+                <option value="B+">(B+)</option>
+                <option value="B-">(B-)</option>
+                <option value="AB+">(AB+)</option>
+                <option value="AB-">(AB-)</option>
+                <option value="O+">(O+)</option>
+                <option value="O-">(O-)</option>
+                <option value="O-">Otro...</option>
+            </select>
+        </div>
+        <div class="espacioAuxiliar"></div>
+        <div class="filas">
+            <label for="" required>Laboratorio:</label>
+            <input #labo="ngModel" [(ngModel)]="f.laboratorio" name="laboratorio" type="text" required />
+        </div>
+        <div class="espacioAuxiliar">
+            <div *ngIf="labo.invalid && (labo.touched || labo.dirty)" class="alerta">
+                <div *ngIf="labo.errors!['required']">Campo obligatorio</div>
+            </div>
+        </div>
+        <div class="filas">
+            <label for="">Adjuntar archivo: </label>
+            <input type="file" (change)="descargarArchivo($event)" />
+        </div>
+        <div class="espacioAuxiliar"></div>
+        <div class="observaciones">
+            <label for="">Observaciones:
+                <span style="font-size: 10px">(Si no hay ninguna poner NO)</span>
+            </label>
+            <div class="observacionesOpciones">
+                <div class="opcion1 opciones">
+                    <input type="radio" id="option1" name="grupoObservaciones" value="1"
+                        [(ngModel)]="opcionSeleccionada" (ngModelChange)="cambiarOpObservacion($event)" />
+                    <label for="option4">SI</label><br />
+                </div>
+                <div class="opcion2 opciones">
+                    <input type="radio" id="option2" name="grupoObservaciones" value="0"
+                        [(ngModel)]="opcionSeleccionada" (ngModelChange)="cambiarOpObservacion($event)" />
+                    <label for="option4">NO</label><br />
+                </div>
+            </div>
+
+            <textarea [(ngModel)]="contenidoObservaciones" name="observaciones" id="" cols="60" rows="10"
+                placeholder="1. Observacion 1&#10;&#10;2. Observacion 2&#10;"
+                [disabled]="opcionSeleccionada !== '1'"></textarea>
+        </div>
+
+        <div class="otros">
+            <div class="filas">
+                <div class="col">
+                    <label for="">Año: </label>
+                    <select id="ano" [(ngModel)]="f.ano" name="ano">
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                        <option value="2014">2014</option>
+                        <option value="2013">2013</option>
+                        <option value="2012">2012</option>
+                        <option value="2011">2011</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="">Fecha de pago:</label>
+                    <input type="datetime-local" [(ngModel)]="f.fechaPago" name="fechaPago" />
+                </div>
+            </div>
+            <div class="filas">
+                <div class="col">
+                    <label for="">Examen medico:</label>
+                    <select [(ngModel)]="f.examenMedico" name="examenMedico" id="examenMedico">
+                        <option value="" disabled selected hidden>
+                            Estado de examen
+                        </option>
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="En revisión">En revision</option>
+                        <option value="Aprobado">Aprobado</option>
+                        <option value="Rechazado">Rechazado</option>
+                        <option value="En espera de firma">En espera de firma</option>
+                        <option value="Firmado">Firmado</option>
+                        <option value="Archivado">Archivado</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="">Charla: </label>
+                    <input type="text" [(ngModel)]="f.charla" name="charla" />
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Registrar Ficha" [disabled]="formulario.form.invalid || nroFichaRepetido" />
+    </form>
+</body>

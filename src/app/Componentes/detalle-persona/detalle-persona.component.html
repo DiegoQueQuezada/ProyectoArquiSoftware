@@ -1,0 +1,172 @@
+<div class="contImg" id="contImg">
+    <button class="cerrar" (click)="cerrarArchivo()"><img src="assets/img/cerrar2.png" alt="" width="20px"
+            height="40px"></button>
+    <div class="imagenDiv">
+        <img [src]="imagenUrl" alt="" width="100%">
+
+    </div>
+</div>
+
+<app-menu></app-menu>
+<div class="cont">
+
+    <div class="contDatos">
+        <h2>Datos de la persona </h2>
+
+        <div class="dato"><b>Nombre : </b> {{persona.nombre}}</div>
+        <div class="dato"><b>Apellidos : </b> {{persona.apellido}}</div>
+        <div class="dato"><b>Edad : </b> {{persona.edad}}</div>
+        <div class="dato"><b>DNI : </b> {{persona.dni}}</div>
+        <div class="dato"><b>Direccion : </b> {{persona.direccion}}</div>
+        <div class="dato"><b>Ocupacion : </b> {{persona.ocupacion}}</div>
+        <div class="dato"><b>Centro de Trabajo : </b> {{persona.centroTrabajo}}</div>
+        <h2>Fichas asociadas</h2>
+    </div>
+
+</div>
+
+<div class="fichas" *ngIf="!fichas || fichas.length === 0">
+    No existen fichas asociadas
+</div>
+
+<div class="contFichas">
+
+
+
+    <div class="cadaFicha" *ngFor="let ficha of fichas;let i=index">
+        <div class="numeroF">Ficha numero {{i+1}}</div>
+        <br>
+        <div class="datoFicha">Numero: {{ficha.nroFicha}}</div>
+        <div>Inscripcion: {{ficha.fechaInscripcion | date:'yyyy-mm-dd'}}</div>
+        <div>Laboratorio: {{ficha.laboratorio}}</div>
+        <div>Tipo de sangre: {{ficha.grupoSanguineo}}</div>
+        <div>Observacion: {{ficha.observaciones}}</div>
+        <div>Estado: {{ficha.estado}}</div>
+        <div *ngIf="ficha.estado=='Terminada' || ficha.estado=='Aprobado'"><a (click)="abrirArchivo(ficha.nroFicha)">Ver
+                archivo</a></div>
+    </div>
+
+
+
+</div>
+
+
+
+<style>
+    .contImg {
+        position: fixed;
+        z-index: 200;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        backdrop-filter: blur(5px);
+        background-color: rgb(0, 0, 0, .4);
+        width: 100%;
+        display: none;
+    }
+
+    .contImg .cerrar {
+        display: block;
+        
+        margin: 10px 30px;
+        cursor: pointer;
+    }
+
+    .contImg .imagenDiv {
+        background-color: red;
+        width: 900px;
+        margin: auto;
+
+    }
+
+    .contImg img {
+        display: block;
+        margin: auto;
+        width: 100%;
+
+    }
+
+    .cont {
+        padding-top: 80px;
+        margin: auto;
+        text-align: center;
+        display: flex;
+        height: 90vh;
+        justify-content: center;
+
+    }
+
+    .cont .dato {
+
+        font: 20px Arial;
+        margin: 20px;
+        color: black;
+        font-weight: 100;
+        display: flex;
+
+    }
+
+    .cont .dato b {
+        text-align: end;
+        display: inline-block;
+        width: 200px;
+        margin-right: 20px;
+
+
+    }
+
+    .cont h2 {
+        font: 40px Verdana;
+        margin: 50px;
+        color: #4458A1;
+        font-weight: 100;
+
+
+    }
+
+    .fichas {
+        font: 14px Segoe UI;
+        font-weight: 500;
+
+        text-align: center;
+    }
+
+    .contFichas {
+
+        padding: 10px 100px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 250px));
+        grid-template-rows: repeat(auto-fill, minmax(2, 1fr));
+
+        justify-content: space-evenly;
+
+        gap: 10px;
+    }
+
+    .cadaFicha {
+        background-color: #4458A1;
+        width: 220px;
+        color: white;
+        font: 15px Segoe UI;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .cadaFicha .numeroF {
+        text-align: center;
+    }
+
+    a {
+        color: white;
+        font-weight: 100;
+        cursor: pointer;
+        text-decoration: underline;
+
+    }
+
+    a:hover {
+
+        color: rgb(229, 215, 215);
+
+    }
+</style>

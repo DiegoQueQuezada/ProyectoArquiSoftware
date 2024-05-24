@@ -1,0 +1,137 @@
+<div class="contAprobar">
+
+    <div class="contInformativo">
+
+        <div class="datos">
+
+            <h3>Aprobar carnet</h3>
+
+            <p class="sub">Datos de la Persona:</p>
+            <div class="dato"><b>Nombre : </b> {{persona.nombre}}</div>
+            <div class="dato"><b>Apellidos : </b> {{persona.apellido}}</div>
+            <div class="dato"><b>Edad : </b> {{persona.edad}}</div>
+            <div class="dato"><b>DNI : </b> {{persona.dni}}</div>
+            <div class="dato"><b>Direccion : </b> {{persona.direccion}}</div>
+            <div class="dato"><b>Ocupacion : </b> {{persona.ocupacion}}</div>
+            <div class="dato"><b>Centro de Trabajo : </b> {{persona.centroTrabajo}}</div>
+
+            <p class="sub">Datos de la ficha:</p>
+
+            <div class="dato"><b>Fecha de inscripcion: </b>{{ficha.fechaInscripcion | date:'yyyy-mm-dd'}}</div>
+            <div class="dato"><b>Laboratorio: </b>{{ficha.laboratorio}}</div>
+            <div class="dato"><b>Tipo de sangre: </b>{{ficha.grupoSanguineo}}</div>
+            <div class="dato"><b>Observaciones: </b>{{ficha.observaciones}}</div>
+
+
+        </div>
+        <div class="archivo">
+            <h3>Archivo adjunto: </h3>
+
+            <div class="archivoAdjunto">
+                <div class="contArchivo">
+                    
+                    <img [src]="imagenUrl" alt="hola" >
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="botones">
+        <input type="submit" value="Aprobar" (click)="AprobarFicha()">
+        <input type="submit" value="Desaprobar" (click)="DesaprobarFicha(ficha.idFicha,persona)">
+
+    </div>
+
+</div>
+
+
+<style>
+    .contAprobar {
+        padding-top: 100px;
+        width: 90%;
+        
+        
+        
+    }
+
+    .contInformativo {
+        display: flex;
+        width: 800px;
+        margin: auto;
+        flex-wrap: wrap;
+    }
+
+    .contInformativo .datos {
+        padding-left: 20px;
+        
+        min-width: 200px;
+        
+        flex: 1;
+        font: 14px Segoe UI;
+    }
+
+    .contInformativo .archivo {
+        padding-left: 20px;
+        min-width: 400px;
+        flex: 1;
+        
+    }
+
+    .datos .sub {
+        font: 20px Calibri;
+    }
+
+    .contInformativo {
+        font: 13px Arial;
+    }
+
+    .botones {
+        text-align: center;
+        background: white;
+        margin: auto;   
+        margin-top: 30px;
+    }
+
+    .botones input {
+        margin: 10px;
+        font: 20px Arial;
+        outline: none;
+        border: none;
+        padding: 10px;
+        border-radius: 2px;
+        width: 150px;
+        color: white;
+        font: 15px Segoe UI ;
+        font-weight: 100;
+    }
+
+    .botones input[value="Aprobar"]{
+        background-color: #3003FF;
+    }
+
+    .botones input[value="Desaprobar"]{
+        background-color: #FF0330;
+    }
+
+    .botones input[value="Aprobar"]:hover{
+        background-color: #2505B7;
+        cursor: pointer;
+    }
+
+    .botones input[value="Desaprobar"]:hover{
+        cursor: pointer;
+        background-color: #9C0621;
+    }
+
+    .botones input[value="Aprobar"]:focus,
+    .botones input[value="Desaprobar"]:focus{
+        scale: 1.01;
+    }
+    .contArchivo{
+        overflow: scroll;
+        
+        height: 80vh;
+    }
+    
+</style>

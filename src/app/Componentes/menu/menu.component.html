@@ -1,0 +1,24 @@
+<nav class="menuContainer">
+  <ul>
+    <li>
+      <a routerLink="/municipal" routerLinkActive="active" href="#">Registro
+      </a>
+    </li>
+    <li>
+      <a routerLink="/lista" routerLinkActive="active" href="#">Vista general
+      </a>
+    </li>
+    <li>
+      <a routerLink="/lista2" routerLinkActive="active" href="#">Vista de carnets</a>
+    </li>
+    <li>
+      <a routerLink="/export" routerLinkActive="active" href="#">Exportar</a>
+    </li>
+    <li class="contCerrar">
+      <div class="botonMenu"><span class="material-symbols-outlined botonAcoplar" #botonAcoplar> menu </span></div> 
+      <div class="cerrar">
+        <a *ngIf="autService.seInicioSesion()" (click)="cerrar()" routerLink="/login" href="">Salir</a>
+      </div>
+    </li>
+  </ul>
+</nav >

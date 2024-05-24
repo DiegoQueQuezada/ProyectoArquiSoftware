@@ -1,0 +1,115 @@
+<app-menu></app-menu>
+<div class="contenedor">
+    <div class="logo">
+        <img src="assets/img/logo.png" class="muni" alt="">
+    </div>
+    <div class="cabezal">
+        <div class="cabezal1Cont">
+            <div class="ordenador">
+                <p>Ordenar por:</p>
+                <select [(ngModel)]="opcionSeleccionada" (ngModelChange)="ordenarPor($event)">
+                    <option value="opcion0">Todos</option>
+                    <option value="opcion1">Fecha mas reciente</option>
+                    <option value="opcion2">Fecha mas antigua</option>
+                    <option value="opcion3">Nombre (A-Z) </option>
+                    <option value="opcion4">Nombre (Z-A)</option>
+                    <option value="opcion5">Apellido (A-Z) </option>
+                    <option value="opcion6">Apellido (Z-A)</option>
+                </select>
+            </div>
+
+            <div class="buscador">
+                <p>Buscar:</p>
+                <div class="inputBuscar">
+
+                    <a (click)="buscarRegistro()" class="buscar"><img src="assets/img/buscar.png" alt=""></a>
+                    <input type="text" [(ngModel)]="filtro" (input)="filtrarPersonas()">
+                    <div class="resultadoFiltro" *ngIf="mostrarResultados && filtro && personasFiltradas">
+                        <div class="resultadoBusqueda" *ngFor="let persona of personasFiltradas" (click)="seleccionarPersona(persona)">
+                            {{ persona.nombre }},{{persona.apellido }} - {{ persona.dni }}</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="tabla" #tabla>
+            <table>
+                <div class="borrada"> Una fila borrada<b class="iconoAdmiracion"> !</b> </div>
+                <tr>
+                    <th>Estado</th>
+                    <th>Nombres y apellidos</th>
+                    <th>DNI</th>
+                    <th>Edad</th>
+                    <th>Fecha</th>
+                    <th>Dias restantes</th>
+                    <th>Opciones</th>
+                </tr>
+
+                <tr class="advertencia" *ngIf="!personas || personas.length === 0">
+                    <td colspan="8">No existen datos disponibles.</td>
+                </tr>
+
+                <tr *ngFor="let i of personas" [id]="i.id_persona">
+                    <td class="estado" id="estadoActual" [ngStyle]="obtenerEstiloFondo(i.estadoFichaActual)">
+                        <div *ngIf="i.estadoFichaActual !== 'En revision'; else revisionBoton">
+
+                            {{i.estadoFichaActual}}
+                        </div>
+                        <ng-template #revisionBoton class="PROCESO">
+
+                            {{i.estadoFichaActual}}
+
+                            <a (click)="irVistaAprobacion(i.id_persona)"
+                                style="font: 11px arial; color:rgb(3, 54, 3);cursor: pointer;"
+                                onmouseover="this.style.color = '#2B572B';" onmouseout="this.style.color = 'green';"
+                                class="verProceso">Ver proceso</a>
+                        </ng-template>
+                    </td>
+                    <td class="nombres">
+                        <div *ngIf="porNombre==true;else PorApellido">
+                            <b>{{i.nombre.split("")[0]}}</b>
+                            <span>{{i.nombre.split("").slice(1).join('')}}</span>,<b>{{i.apellido.split("")[0]}}</b>
+                            <span>{{i.apellido.split("").slice(1).join('')}}</span>
+                        </div>
+                        <ng-template #PorApellido>
+                            <b>{{i.apellido.split("")[0]}}</b>
+                            <span>{{i.apellido.split("").slice(1).join('')}}</span>,<b>{{i.nombre.split("")[0]}}</b>
+                            <span>{{i.nombre.split("").slice(1).join('')}}</span>
+                        </ng-template>
+                    </td>
+                    <td>{{i.dni}}</td>
+                    <td>{{i.edad}}</td>
+
+                    <td class="fechaRe">{{i.fechaRegistro | date:'dd/MM/yyyy' }} - {{ i.fechaRegistro | date:'HH:mm' }}
+                    </td>
+                    <td>{{i.dias}}</td>
+
+                    <td class="op">
+                        <div
+                            *ngIf="i.estadoFichaActual !== 'En revision' && i.estadoFichaActual !== 'Aprobado' ; else revisionIcon">
+                            <!-- Icono para Nueva Ficha cuando el estado no es 'Revision' -->
+                            <a (click)="AgregarNuevaFicha(i.id_persona)"><img src="assets/img/ficha.png"
+                                    title="Nueva Ficha"></a>
+                        </div>
+                        <ng-template #revisionIcon>
+                            <!-- Icono diferente cuando el estado es 'Revision' -->
+                            <a><img src="assets/img/noFicha.png" title="Ficha aprobada o en revision"
+                                    style="scale: 1.1;"></a>
+                        </ng-template>
+                        <div><a (click)="detallarPersona(i.id_persona)"><img src="assets/img/consulta.png"
+                                    title="Detallar dato"></a></div>
+                        <div><a (click)="modificarPersona(i.id_persona)"><img src="assets/img/editar.png"
+                                    title="Modicar dato"></a></div>
+                        <div><a (click)="eliminarPersona(i.id_persona)"><img src="assets/img/rechazar.png"
+                                    title="Eliminar dato"></a></div>
+
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+
+
+   

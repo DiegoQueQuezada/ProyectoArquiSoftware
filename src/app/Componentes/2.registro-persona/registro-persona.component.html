@@ -1,0 +1,137 @@
+<app-menu></app-menu>
+<div class="contenedor">
+	<div class="capaNegra"></div>
+	<form (ngSubmit)="enviarDatos()" #empleadoForm="ngForm">
+		<div class="cabezal">
+			<img src="assets/img/logo.png" alt="" width="200px" />
+			<div class="fecha">
+				<p>{{ fechaFormateada | titlecase }}</p>
+			</div>
+		</div>
+
+		<h2>Registro preliminar</h2>
+		<div class="preguntas">
+			<div class="filas">
+				<label>Nombres:</label>
+				<input #nombre="ngModel" [(ngModel)]="p.nombre" name="nombre" type="text" required minlength="3"
+					autocomplete="off" />
+			</div>
+			<div class="contAlerta">
+				<div class="alerta" *ngIf="nombre.invalid && nombre.dirty">
+					<div *ngIf="nombre.errors!['required']">
+						El campo no debe estar vacio
+					</div>
+					<div *ngIf="nombre.errors!['minlength']">
+						El nombre tiene que contener como minimo 3 caracteres
+					</div>
+				</div>
+			</div>
+			<div class="filas">
+				<label>Apellidos:</label>
+				<input [(ngModel)]="p.apellido" name="apellido" type="text" minlength="3" required autocomplete="off"
+					#apellido="ngModel" />
+			</div>
+			<div class="contAlerta">
+				<div class="alerta" *ngIf="apellido.invalid && apellido.dirty">
+					<div *ngIf="apellido.errors!['required']">
+						El campo no debe estar vacio
+					</div>
+					<div *ngIf="apellido.errors!['minlength']">
+						El apellido tiene que contener como minimo 3 caracteres
+					</div>
+				</div>
+			</div>
+
+			<div class="filas">
+				<div class="columna">
+					<label>Edad:</label>
+					<input [(ngModel)]="p.edad" #edad="ngModel" maxlength="2" name="edad" type="Number" min="15"
+						max="100" required autocomplete="off" />
+				</div>
+				<div class="columna">
+					<label>Sexo:</label>
+					<select name="gender" [(ngModel)]="p.sexo">
+						<option value="femenino">Femenino</option>
+						<option value="masculino">Masculino</option>
+					</select>
+				</div>
+			</div>
+			<div class="contAlerta">
+				<div class="alerta" *ngIf="edad.invalid && edad.dirty">
+					<div *ngIf="edad.errors!['required']">
+						El campo no debe estar vacio
+					</div>
+					<div *ngIf="edad.errors!['min']">Edad minima 15</div>
+					<div *ngIf="edad.errors!['max']">Edad maxima 100</div>
+					<div *ngIf="edad.errors!['maxlength']">Edad maxima 100</div>
+				</div>
+			</div>
+			<div class="filas">
+				<label>DNI:</label>
+				<input [ngClass]="{ 'is-invalid': dniExistente }" [(ngModel)]="p.dni" #dni="ngModel" name="dni"
+					type="text" minlength="8" maxlength="8" required autocomplete="off" (input)="verificarDNI(p.dni)" />
+			</div>
+			<div class="contAlerta">
+				<div class="alerta" *ngIf="dni.invalid && dni.dirty">
+					<div *ngIf="dni.errors!['required']">
+						El campo no debe estar vacio
+					</div>
+					<div *ngIf="dni.errors!['maxlength']">
+						El DNI debe tener 8 digitos
+					</div>
+					<div *ngIf="dni.errors!['minlength']">
+						El DNI debe tener 8 digitos
+					</div>
+				</div>
+				<div class="alerta" *ngIf="dniExistente">
+					Este DNI ya esta registrado verifique.
+				</div>
+			</div>
+			<div class="filas">
+				<label>Direccion:</label>
+				<input [(ngModel)]="p.direccion" #direccion="ngModel" name="direccion" type="text" required
+					autocomplete="off" />
+			</div>
+			<div class="contAlerta">
+				<div class="alerta" *ngIf="direccion.invalid && direccion.dirty">
+					<div *ngIf="direccion.errors!['required']">
+						El campo no debe estar vacio
+					</div>
+				</div>
+			</div>
+			<div class="filas">
+				<label>Ocupacion:</label>
+				<input [(ngModel)]="p.ocupacion" #ocupacion="ngModel" name="ocupacion" type="text" required
+					autocomplete="off" />
+			</div>
+			<div class="contAlerta">
+				<div class="alerta" *ngIf="ocupacion.invalid && ocupacion.dirty">
+					<div *ngIf="ocupacion.errors!['required']">
+						El campo no debe estar vacio
+					</div>
+				</div>
+			</div>
+
+			<div class="filas">
+				<label>Centro de trabajo:</label>
+				<input [(ngModel)]="p.centroTrabajo" #centroTrabajo="ngModel" name="centroTrabajo" type="text" required
+					autocomplete="off" />
+			</div>
+			<div class="alerta" *ngIf="centroTrabajo.invalid && centroTrabajo.dirty">
+				<div *ngIf="centroTrabajo.errors!['required']">
+					El campo no debe estar vacio
+				</div>
+			</div>
+		</div>
+
+		<div class="submitContainer">
+			<input type="submit" name="" [disabled]="empleadoForm.form.invalid || dniExistente"
+				value="Registrar persona" />
+			<div class="aviso">
+				Porfavor complete todas las celdas para activar el registro
+			</div>
+		</div>
+	</form>
+</div>
+
+<style type="text/css"></style>

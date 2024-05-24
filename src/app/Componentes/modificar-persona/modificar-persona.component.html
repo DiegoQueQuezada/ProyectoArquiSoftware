@@ -1,0 +1,239 @@
+<div class="contForm">
+    <h2>Modificar datos</h2>
+    <form  #empleadoForm="ngForm">
+        <div class="preguntas">
+            <div class="filas">
+                <label>Nombres:</label>
+                <input #nombre="ngModel" [(ngModel)]="persona.nombre" name="nombre" type="text" required minlength="3"
+                    autocomplete="off">
+            </div>
+            <div class="contAlerta">
+                <div class="alerta" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+
+                    <div *ngIf="nombre.errors!['required']">
+                        El campo no debe estar vacio
+                    </div>
+                    <div *ngIf="nombre.errors!['minlength']">
+                        El nombre tiene que contener como minimo 3 caracteres
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="filas">
+                <label>Apellidos:</label>
+                <input [(ngModel)]="persona.apellido" name="apellido" type="text" minlength="3" required
+                    autocomplete="off" #apellido="ngModel">
+            </div>
+            <div class="contAlerta">
+
+                <div class="alerta" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+
+                    <div *ngIf="apellido.errors!['required']">
+                        El campo no debe estar vacio
+                    </div>
+                    <div *ngIf="apellido.errors!['minlength']">
+                        El apellido tiene que contener como minimo 3 caracteres
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="filas">
+                <label>Edad:</label>
+                <input [(ngModel)]="persona.edad" #edad="ngModel" maxlength="2" name="edad" type="Number" min="15"
+                    max="100" required autocomplete="off">
+            </div>
+            <div class="contAlerta">
+
+                <div class="alerta" *ngIf="edad.invalid && (edad.dirty || edad.touched)">
+
+                    <div *ngIf="edad.errors!['required']">
+                        El campo no debe estar vacio
+                    </div>
+                    <div *ngIf="edad.errors!['min']">
+                        Edad minima 15
+                    </div>
+                    <div *ngIf="edad.errors!['max']">
+                        Edad maxima 100
+                    </div>
+                    <div *ngIf="edad.errors!['maxlength']">
+                        Edad maxima 100
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="filas">
+                <label>Direccion:</label>
+                <input [(ngModel)]="persona.direccion" #direccion="ngModel" name="direccion" type="text" required
+                    autocomplete="off">
+            </div>
+            <div class="contAlerta">
+
+                <div class="alerta" *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)">
+
+                    <div *ngIf="direccion.errors!['required']">
+                        El campo no debe estar vacio
+                    </div>
+
+                </div>
+            </div>
+            <div class="filas">
+                <label>Ocupacion:</label>
+                <input [(ngModel)]="persona.ocupacion" #ocupacion="ngModel" name="ocupacion" type="text" required
+                    autocomplete="off">
+            </div>
+            <div class="contAlerta">
+
+                <div class="alerta" *ngIf="ocupacion.invalid && (ocupacion.dirty || ocupacion.touched)">
+
+                    <div *ngIf="ocupacion.errors!['required']">
+                        El campo no debe estar vacio
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <div class="filas">
+                <label>Centro de trabajo:</label>
+                <input [(ngModel)]="persona.centroTrabajo" #centroTrabajo="ngModel" name="centroTrabajo" type="text"
+                    required autocomplete="off">
+            </div>
+            <div class="alerta" *ngIf="centroTrabajo.invalid && (centroTrabajo.dirty || centroTrabajo.touched)">
+
+                <div *ngIf="centroTrabajo.errors!['required']">
+                    El campo no debe estar vacio
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+        <div class="contSubmit">
+            <input (click)="modificarPersona()" class="submit1" type="submit" name="" [disabled]="empleadoForm.form.invalid || dniExistente"
+                value="Modificar">
+            <input (click)="cancelar()" class="submit2" type="button" name="" [disabled]="empleadoForm.form.invalid || dniExistente"
+                value="Cancelar">
+        </div>
+        <div class="aviso">Porfavor complete todas las celdas para activar el registro</div>
+
+    </form>
+
+</div>
+
+<style>
+    .contForm h2 {
+        background: white;
+        margin: 0;
+        padding: 0;
+        padding: auto;
+        color: white;
+        font: 20px Verdana;
+        border-radius: 3px;
+        width: 100%;
+        font-family: 'Courier New', Courier, monospace;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        background: linear-gradient(45deg, #2D2D59 30%, white 90%);
+
+
+    }
+
+    .contForm {
+        width: 500px;
+        background: #4458A1;
+        margin: auto;
+        margin-top: 100px;
+        border: none;
+        border-radius: 3px;
+        margin-bottom: 100px;
+        border: 1px solid #4458A1;
+
+    }
+
+    .contForm form {
+        padding: 5px 20px;
+        padding-top: 0;
+    }
+
+    .contForm form .filas {
+        color: white;
+        font: 17px Segoe UI;
+        font-weight: 100;
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .contForm form .filas label {
+        margin-bottom: 5px;
+        width: 100%;
+    }
+
+    .contForm form .filas input {
+        width: 100%;
+        padding: 5px 10px;
+        background: #B4BCD9;
+        border: none;
+        outline: none;
+        border-radius: 2px;
+        font-size: 15px;
+    }
+
+    .contForm .contSubmit {
+        display: flex;
+    }
+
+    .contForm .contSubmit .submit1 {
+        transition: all 0.3s ease;
+        background: rgb(45, 45, 89, 0.8);
+        outline: none;
+        border: none;
+        color: white;
+        margin-top: 10px;
+        padding: 10px;
+        font: 13px Segoe UI;
+        flex: 1;
+        margin-right: 20px;
+    }
+
+    .contForm .contSubmit .submit2 {
+        transition: all 0.3s ease;
+        background: rgb(206, 62, 62, 0.8);
+        outline: none;
+        border: none;
+        color: white;
+        margin-top: 10px;
+        padding: 10px;
+        font: 13px Segoe UI;
+        flex: 1;
+    }
+
+    .contForm .contSubmit .submit1:hover {
+        transition: all 0.3s ease;
+        background: #2D2D59;
+    }
+
+    .contForm .contSubmit .submit2:hover {
+        transition: all 0.3s ease;
+        background: #CE3E3E;
+    }
+
+    .contForm .contSubmit .submit1:hover,
+    .contForm .contSubmit .submit2:hover {
+        cursor: pointer;
+    }
+
+    .contForm form .aviso {
+        text-align: center;
+        margin-top: 10px;
+        color: white;
+    }
+</style>

@@ -1,0 +1,260 @@
+<app-menu></app-menu>
+<div class="contCarnet">
+    <div class="cabezal1Cont">
+        <div class="ordenador col">
+            <p>Ordenar por:</p>
+            <select [(ngModel)]="opcionSeleccionada" (ngModelChange)="ordenarPor($event)">
+                <option value="opcion0">Todos</option>
+                <option value="opcion1">Esta semana</option>
+                <option value="opcion2">Este mes</option>
+                <option value="opcion3">Este Año</option>
+                <option value="opcion4">Nombre (A-Z) </option>
+                <option value="opcion5">Nombre (Z-A)</option>
+            </select>
+        </div>
+
+        <div class="buscador col">
+            <p>Buscar:</p>
+            <div class="inputBuscar">
+                <a (click)="buscarRegistro()" class="buscar"><img src="assets/img/buscar.png" alt=""></a>
+                <input type="text" [(ngModel)]="filtro" (input)="filtrarPersonas()">
+                <div class="resultadoFiltro" *ngIf="mostrarResultados && filtro && carnetFiltrados">
+                    <div class="resultadoBusqueda" *ngFor="let carnet of carnetFiltrados"
+                        (click)="seleccionarPersona(carnet)">
+                        {{ carnet.persona.nombre }},{{carnet.persona.apellido }} - {{ carnet.persona.dni
+                        }}-{{carnet.numeroCarnet}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <table>
+        <tr>
+            <th>Estado</th>
+            <th> Persona </th>
+            <th> Fecha Registro </th>
+            <th> Fecha Emision </th>
+            <th> Dias restantes</th>
+            <th> Caduca </th>
+            <th>Detalles</th>
+        </tr>
+        <tr class="advertencia" *ngIf="!listaCarnet || listaCarnet.length===0 ">
+            <td colspan="7">No existen datos disponibles</td>
+        </tr>
+        <tr class="advertencia" *ngFor="let carnet of listaCarnet " [id]="carnet.idCarnet">
+            <td>{{carnet.estado}}</td>
+            <td class="celdaPersona" *ngIf="carnet.persona">{{carnet.persona.nombre}},
+                {{carnet.persona.apellido}}<br><b>DNI: </b>{{carnet.persona.dni}}</td>
+            <td>{{carnet.fechaRegistro | date:'dd/MM/yyyy' }}</td>
+            <td class="emisionCelda">
+
+
+                <div *ngIf="!carnet.emitido">
+
+                    Sin emitir<button (click)="emitirCarnet(carnet)">Emitir</button>
+                </div>
+                <div *ngIf="carnet.emitido">
+
+                    {{carnet.fechaEmision | date:'dd/MM/yyyy'}}
+                </div>
+            </td>
+            <td>{{carnet.dias}}</td>
+            <td>{{carnet.fechaCaducidad | date:'dd/MM/yyyy' }}</td>
+            <td class="op">
+                <div><a (click)="detallarPersona(carnet.idCarnet)"><img src="assets/img/consulta.png"
+                            title="Detallar dato"></a></div>
+            </td>
+        </tr>
+
+    </table>
+</div>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .cabezal1Cont {
+
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 200px;
+        margin-bottom: 30px;
+    }
+
+    .cabezal1Cont .col {
+        display: flex;
+        flex: 1;
+        flex-basis: 200px;
+        flex-wrap: wrap;
+
+    }
+
+    .cabezal1Cont .col input,
+    .cabezal1Cont .col select {
+        background: white;
+        padding: 5px 10px;
+        width: 100%;
+        outline: none;
+        outline: 1px solid #BD403F;
+        border: none;
+    }
+
+
+    .cabezal1Cont .col .inputBuscar {
+        position: relative;
+        width: 100%;
+    }
+
+    .cabezal1Cont .col .inputBuscar a {
+        background-color: #BD403F;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    .cabezal1Cont .col .inputBuscar a img {
+
+        height: 100%;
+        padding: 3px;
+    }
+
+    .cabezal1Cont .col p {
+        width: 100%;
+        font: 20px Arial;
+
+
+    }
+
+    .cabezal1Cont .col:nth-child(2n+1) {
+
+        margin-right: 30px;
+    }
+
+    .cabezal1Cont .resultadoFiltro {
+        position: absolute;
+        width: 100%;
+        outline: 1px solid #3F56A5;
+
+        max-height: 100px;
+        background: white;
+        overflow: scroll;
+        overflow-x: hidden;
+        z-index: 100;
+    }
+
+    .resultadoFiltro div {
+        text-align: start;
+        padding-left: 10px;
+        color: black;
+        font: 13px Verdana;
+
+
+    }
+
+    .pintar {
+        animation: pintar 4s ease;
+    }
+
+    @keyframes pintar {
+
+        from {
+            border: 2px solid red;
+        }
+
+        to {
+            border: 2px solid #4458A1;
+        }
+
+    }
+
+    .resultadoFiltro div:hover {
+        background: #DB6F6E;
+        cursor: pointer;
+    }
+
+    .contCarnet {
+        padding-top: 100px;
+        width: 100%;
+        height: 110vh;
+    }
+
+    .contCarnet table {
+        margin: auto;
+        width: 90%;
+        border-collapse: collapse;
+        font: 15px Segoe UI;
+        border: 1px solid #4458A1;
+
+    }
+
+    .contCarnet table td {
+
+        border: 1px solid #4458A1;
+    }
+
+    .contCarnet th {
+        margin: 0;
+        position: sticky;
+        top: -1px;
+        color: white;
+        background: #4458A1;
+        font-weight: 100;
+
+
+    }
+
+    .contCarnet .advertencia {
+        text-align: center;
+
+    }
+
+    .celdaPersona {
+        padding: 0 10px;
+        text-align: start;
+    }
+
+    .op {
+        padding-top: 10px;
+    }
+
+    .op div {
+        display: inline-block;
+        padding: 0 5px;
+    }
+
+    img {
+        width: 30px;
+        cursor: pointer;
+    }
+
+    .emisionCelda {
+        text-align: center;
+
+    }
+
+    .emisionCelda p {
+        display: block;
+    }
+
+    .emisionCelda button {
+        background: #4458A1;
+        color: black;
+        border: none;
+        outline: none;
+        color: white;
+        border-radius: 3px;
+        cursor: pointer;
+        font: 10px Segoe UI;
+        display: block;
+        margin: auto;
+    }
+
+    .emisionCelda button:hover {
+        background: #5769AD;
+    }
+</style>

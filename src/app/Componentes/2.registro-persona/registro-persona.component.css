@@ -1,0 +1,258 @@
+@font-face {
+  font-family: "Saira";
+  src: url("/assets/fonts/static/Saira-Light.ttf") format("truetype");
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/*fondo y sus detalles*/
+
+.contenedor {
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+  position: relative;
+  background-image: url(/assets/img/fondoPorve.png);
+  background-size: 100% 100%;
+  height: 94.6%;
+}
+.contenedor .capaNegra {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+/*formulario*/
+
+form {
+  margin: 75px 20px;
+  border-radius: 5px;
+  min-width: 400px;
+  flex-basis: 800px;
+  background: transparent;
+  font: 16px Roboto;
+  z-index: 100;
+  padding: 20px 60px;
+  box-shadow: 2px 2px 10px -4px black;
+  position: relative;
+  backdrop-filter: blur(5px) saturate(1.2) brightness(0.9) hue-rotate(0deg);
+  background: rgb(255, 255, 255, 0.8);
+  /* Ajusta el valor para cambiar la intensidad del desenfoque */
+  height: fit-content;
+}
+form .cabezal {
+  align-items: end;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap-reverse;
+  align-items: start;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-family: Saira;
+}
+form .preguntas {
+  padding: 0 30px;
+}
+form .filas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: baseline;
+  align-items: stretch;
+  margin: 6px 0 2px 0;
+}
+
+form .filas label {
+  color: color;
+  font-weight: 300;
+  display: inline-block;
+  font-family: monospace;
+  background: #6f6f6f;
+  color: white;
+  padding: 0.2rem;
+  display: flex;
+  display: inline-flex;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  flex: 1 1 auto !important;
+  color: white;
+  border-radius: 0.1rem;
+}
+form input,
+form select {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  border: none;
+  font: 15px Segoe UI;
+  /* padding: 0.3rem; */
+  flex: 1200 auto;
+  border: 1px solid #8b8b8b;
+  border-radius: 0.1rem;
+  padding: 0.2rem 0.5rem;
+}
+
+form .filas .columna {
+  display: flex;
+  flex: 1;
+}
+
+/*fila divida 1*/
+
+.filas:nth-child(5) .columna:nth-child(1) {
+}
+.filas:nth-child(5) .columna:nth-child(2) {
+}
+.filas:nth-child(5) .columna:nth-child(2) label {
+}
+
+img {
+  width: 300px;
+  padding: 5px;
+  margin-left: 20px;
+  margin-right: 10px;
+  margin-top: 20px;
+  filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+}
+
+.fecha {
+  display: inline-block;
+  color: white;
+
+  flex: 1;
+  position: relative;
+  display: flex;
+  font-weight: 100;
+  color: black;
+  justify-content: end;
+}
+
+.cabezal p {
+  width: 257px;
+}
+
+h2 {
+  text-align: center;
+
+  font-weight: 400;
+  margin-bottom: 20px;
+
+  font: 30px Saira;
+}
+
+.columna:nth-child(2n + 1) {
+  margin-right: 20px;
+  flex-basis: 10px;
+}
+.columna:nth-child(2n + 1) input {
+  flex-basis: 50px;
+}
+.columna:nth-child(2n + 1) label {
+  flex: 0;
+  flex-basis: 80px;
+}
+.columna:nth-child(2n) label {
+  flex-basis: 0;
+}
+
+input[type="submit"] {
+  display: block;
+  /* margin: auto; */
+  font: 15px Roboto;
+  border: none;
+  margin-top: 25px;
+  padding: 7px 0;
+  margin-top: 12px;
+  margin-bottom: 10px;
+  font-weight: 100;
+  background: rgba(8, 10, 86);
+  box-shadow: 1px 0px 10px -3px black;
+  color: white;
+  width: auto !important;
+  padding: 5px 10px !important;
+}
+.submitContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  padding: 0 30px 0 30px;
+}
+input:focus,
+select:focus {
+  font-weight: 600;
+  outline-color: #4458a1;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+input[type="submit"]:hover {
+  cursor: pointer;
+  box-shadow: 2px 0px 10px 0px black;
+
+  background: #031f69;
+  transition: all 0.1s;
+}
+
+.filas:nth-child(8) input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.haciaAbajo {
+  position: relative;
+  justify-content: end;
+  height: 40px;
+}
+
+.edadPersona .haciaAbajo {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.edadPersona .haciaAbajo img {
+  height: 100%;
+  width: 40px;
+  margin: 0;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-left: 1px solid grey;
+}
+
+.filas:nth-child(8) input:focus + .haciaAbajo img {
+  scale: 1.05;
+}
+.form label {
+  color: black;
+}
+
+.contAlerta {
+  height: 15px;
+}
+.alerta {
+  font: 0.65rem Segoe UI;
+  display: block;
+  text-align: end;
+  color: rgb(255, 0, 0);
+  margin: 0;
+}
+
+input[type="submit"]:disabled {
+  background: rgba(8, 10, 86, 0.4);
+  color: white;
+  cursor: not-allowed;
+}
+.aviso {
+  text-align: center;
+  font: 9px Arial;
+  color: black;
+  font-weight: 100;
+}

@@ -1,0 +1,62 @@
+<div class="contForm">
+
+    <div class="aux"><img src="./assets/img/escudo.png" alt="" /></div>
+
+    <form class="formRegistro" action="" *ngIf="usuarioExiste">
+        <h2>Primera vez que entras?</h2>
+        <h3>Registrate</h3>
+        <div class="fila">
+            <div class="subfila">
+                <label>Usuario:</label>
+                <input class="subInput" id="usuario" [(ngModel)]="usuario.nombreUsuario" type="text" name="usuario"
+                    autocomplete="off" />
+            </div>
+            <div class="subfila">
+                <label>Contraseña:</label>
+                <input class="subInput" id="usuario" [(ngModel)]="usuario.contrasenaUsuario" type="password"
+                    name="usuario" autocomplete="off" />
+            </div>
+        </div>
+        <div class="fila">
+            <div class="subfila">
+                <label>Nombres:</label>
+                <input class="subInput" id="usuario" [(ngModel)]="usuario.nombres" type="text" name="usuario"
+                    autocomplete="off" />
+            </div>
+            <div class="subfila">
+                <label>Apellidos:</label>
+                <input class="subInput" id="usuario" [(ngModel)]="usuario.apellidos" type="text" name="usuario"
+                    autocomplete="off" />
+            </div>
+        </div>
+        <div class="fila">
+            <label>Area:</label>
+            <input id="usuario" [(ngModel)]="usuario.area" type="text" name="usuario" autocomplete="off" />
+        </div>
+        <button (click)="enviarNuevoUsuario(usuario)">Registrarse</button>
+    </form>
+
+    <form action="" class="formEntrar" *ngIf="!usuarioExiste">
+        <div class="capa"></div>
+        <h2>Bienvenido de nuevo !!</h2>
+
+        <h3>Ingrese sus credenciales porfavor</h3>
+
+        <div class="fila">
+            <div>
+                <div class="advertencia">{{ advertenciaUser }}</div>
+            </div>
+            <label>Usuario:</label>
+
+            <input id="usuario" [(ngModel)]="nombreUsuario" type="text" name="usuario" autocomplete="off" />
+        </div>
+        <div class="fila">
+            <div>
+                <div class="advertencia">{{ advertenciaCont }}</div>
+            </div>
+            <label>Contraseña:</label>
+            <input id="contra" [(ngModel)]="contrasena" type="password" name="contra" autocomplete="off" />
+        </div>
+        <button (click)="enviarCredenciales()">ENTRAR</button>
+    </form>
+</div>

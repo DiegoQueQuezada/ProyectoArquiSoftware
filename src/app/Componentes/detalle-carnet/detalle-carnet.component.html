@@ -1,0 +1,73 @@
+<app-menu></app-menu>
+<div class="contDetalle">
+    <h3 class="titulo">Datos del carnet sanitario</h3>
+    <div class="contDatos">
+        <p class="titulos">Persona:</p>
+        <div><b>Nombre:</b> {{carnet.persona.nombre}}</div>
+        <div><b>Apellidos:</b>{{carnet.persona.apellido}}</div>
+        <div><b>Fecha de registro:</b> {{carnet.persona.fechaRegistro}}</div>
+        <div><b>Edad:</b>{{carnet.persona.edad}}</div>
+        <div><b>DNI:</b>{{carnet.persona.dni}}</div>
+        <div><b>Direccion:</b>{{carnet.persona.direccion}}</div>
+        <div><b>Ocupacion</b>{{carnet.persona.ocupacion}}</div>
+        <div><b>Centro de trabajo:</b>{{carnet.persona.centroTrabajo }}</div>
+        <div><b>Estado:</b> {{carnet.persona.estadoFichaActual}}</div>
+
+        <p class="titulos">Ficha:</p>
+        <div><b>Fecha de inscripcion: </b>{{ficha.fechaInscripcion | date:'yyyy-mm-dd'}}</div>
+        <div><b>Laboratorio:</b>{{ficha.laboratorio}}</div>
+        <div><b>Tipo de sangre:</b>{{ficha.grupoSanguineo}}</div>
+        <div><b>Observaciones:</b>{{ficha.observaciones}}</div>
+        <div><b>Año:</b>{{ficha.ano}}</div>
+        <div><b>Fecha de pago:</b>{{ficha.fechaPago}}</div>
+        <div><b>Examen medico:</b>{{ficha.examenMedico}}</div>
+        <div><b>Charla:</b>{{ficha.charla}}</div>
+        <p class="titulos">Documento:</p>
+
+    </div>
+
+    <div class="contImagen">
+        <img [src]="imagenUrl" alt="" width="100%">
+    </div>
+
+
+</div>
+
+
+<style>
+    .contDetalle {
+        height: 100vh;
+        padding-top: 100px;
+
+        font: 15px Segoe UI;
+        text-align: center;
+
+    }
+
+    .contDatos {
+        margin: auto;
+
+        width: 40%;
+        text-align: start;
+    }
+
+    .contImagen {
+        margin: auto;
+        width: 80%;
+    }
+
+    .titulo {
+        background: #4458A1;
+        color: white;
+        letter-spacing: 2px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .titulos {
+        color: #4458A1;
+        font: 30px Segoe UI;
+    }
+</style>

@@ -1,0 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: "Saira";
+  src: url("/assets/fonts/static/Saira-Light.ttf") format("truetype");
+}

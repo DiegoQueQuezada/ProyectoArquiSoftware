@@ -1,0 +1,199 @@
+
+
+body{
+  height: 93%;
+}
+form {
+  max-width: 700px;
+  min-width: 400px;
+  padding: 10px 40px;
+  margin: auto;
+}
+
+form .otros {
+  margin-top: 20px;
+}
+
+form .filas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: baseline;
+  align-items: stretch;
+  margin: 6px 0 2px 0;
+}
+
+form .filas .col {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+form .filas .col:nth-child(2n + 1) {
+  margin-right: 40px;
+}
+form .filas .col:nth-child(2n) {
+}
+
+form label {
+  color: color;
+  font-weight: 300;
+  display: inline-block;
+  font-family: monospace;
+  background: #6f6f6f;
+  color: white;
+  padding: 0.2rem;
+  display: flex;
+  display: inline-flex;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  flex: 1 1 auto !important;
+  color: white;
+  border-radius: 0.1rem;
+}
+form input,
+form select {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  border: none;
+  font: 15px Segoe UI;
+  /* padding: 0.3rem; */
+  flex: 1200 auto;
+  border: 1px solid #8b8b8b;
+  border-radius: 0.1rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.filas input,
+.filas select,
+.observaciones textarea {
+  outline: none;
+}
+textarea {
+  padding: 10px;
+}
+textarea:focus::placeholder {
+  color: white;
+}
+.filas input[type="file"] {
+  border: 1px solid grey;
+  border-radius: 2px;
+  padding: 0px 0px;
+  height: 28px;
+}
+.filas input[type="file"]::file-selector-button {
+  padding: 0;
+  height: 100%;
+  padding: 0 10px;
+  border-radius: 0;
+  border: none;
+  border-right: 1px solid grey;
+  cursor: pointer;
+  background: white;
+  color: black;
+  font-family: Arial;
+}
+
+.filas input[type="file"]::file-selector-button:hover {
+  background-color: #cfcfcf;
+}
+
+form .observaciones {
+  font: 15px Roboto;
+  display: flex;
+  flex-direction: column;
+}
+
+form .observaciones label {
+  margin: 0;
+  padding: 0;
+  padding-left: 10px;
+  background: none;
+  color: black;
+  width: auto;
+  display: inline-block;
+}
+form .observaciones .observacionesOpciones {
+  display: flex;
+  flex: 1;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin:.625rem 0 .625rem 0;
+}
+form .observaciones .observacionesOpciones .opciones {
+  margin: 0px 0;
+  background: none;
+  color: black;
+  width: auto;
+  display: inline-block;
+  display: flex;
+  align-items: stretch;
+}
+form .observaciones .observacionesOpciones .opciones input{
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin: 0;
+}
+.datos div {
+  font: 20px Arial;
+  margin: 10px 0;
+}
+
+.datos h1 {
+  font: 30px Saira;
+  border: 1px solid #4458a1;
+  border-left: none;
+  border-right: none;
+  margin: 20px 0;
+  padding: 10px;
+}
+
+
+input[type="submit"] {
+  display: block;
+  width: 30%;
+  margin-top: 30px;
+  padding: 10px 5px;
+  background: #4458a1;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font: 15px Segoe UI;
+}
+
+input[type="submit"]:disabled {
+  background: rgba(8, 10, 86, 0.4);
+  color: white;
+  cursor: not-allowed;
+}
+
+input[type="submit"]:disabled:hover {
+  background: rgba(8, 10, 86, 0.4);
+}
+
+input[type="submit"]:hover {
+  background: #6e85db;
+}
+
+input[type="submit"]:focus {
+  background-color: #445287;
+  scale: 1.01;
+}
+
+.espacioAuxiliar {
+  height: 17px;
+}
+
+.alerta {
+  color: red;
+  font: 13px Segoe UI;
+  text-align: end;
+}
+@media screen and (max-width: 744px) {
+  form .col label {
+    text-align: start;
+  }
+}
